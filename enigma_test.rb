@@ -20,7 +20,23 @@ class EnigmaTest < Minitest::Test
   def test_has_no_key_to_start
     e = Enigma.new
 
-    assert_equal nil, e.key
+    assert_equal nil, e.master_key
+  end
+
+  def test_has_no_key_offsets_to_start
+    e = Enigma.new
+
+    assert_equal nil, e.a
+    assert_equal nil, e.b
+    assert_equal nil, e.c
+    assert_equal nil, e.d
+  end
+
+  def test_has_key_after_running_keygenerator
+    e = Enigma.new
+    e.encrypt
+
+    assert_equal 12345, e.master_key
   end
 
   def test_has_no_date_to_start
@@ -29,11 +45,21 @@ class EnigmaTest < Minitest::Test
     assert_equal nil, e.date
   end
 
-  def test_can_create_instance_of_key_generator
+  def test_has_date_after_running_keygenerator
     e = Enigma.new
     e.encrypt
 
-    refute_equal 12345, e.key
+    assert_equal "26/10/2015", e.date
+  end
+
+  def test_has_key_offsets_after_running_encrypt
+    e = Enigma.new
+    e.encrypt
+
+    assert_equal 12, e.a
+    assert_equal 23, e.b
+    assert_equal 34, e.c
+    assert_equal 45, e.d
   end
 
 
