@@ -49,17 +49,25 @@ class EnigmaTest < Minitest::Test
     e = Enigma.new
     e.encrypt
 
-    assert_equal "26/10/2015", e.date
+    assert_equal "0225", e.date
   end
 
-  def test_has_key_offsets_after_running_encrypt
+  def test_has_final_offsets_after_running_encrypt
     e = Enigma.new
     e.encrypt
 
     assert_equal 12, e.a
-    assert_equal 23, e.b
-    assert_equal 34, e.c
-    assert_equal 45, e.d
+    assert_equal 25, e.b
+    assert_equal 36, e.c
+    assert_equal 50, e.d
+  end
+
+  def test_can_create_encryptor_and_pass_in_attributes
+    skip
+    e = Enigma.new
+    e.encrypt
+
+    assert enc
   end
 
 

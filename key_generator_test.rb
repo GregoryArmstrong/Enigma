@@ -25,14 +25,14 @@ class KeyGeneratorTest < Minitest::Test
   end
 
   def test_can_generate_key_offsets
-    e = Enigma.new
-    e.encrypt
+    kg = KeyGenerator.new(12345)
+    kg.generate_key_offsets
 
-    assert_equal 12345, e.master_key
-    assert_equal 12, e.a
-    assert_equal 23, e.b
-    assert_equal 34, e.c
-    assert_equal 45, e.d
+    assert_equal 12345, kg.key
+    assert_equal 12, kg.a
+    assert_equal 23, kg.b
+    assert_equal 34, kg.c
+    assert_equal 45, kg.d
   end
 
   def test_starts_with_no_date
@@ -69,15 +69,25 @@ class KeyGeneratorTest < Minitest::Test
     assert_equal 50, kg.d
   end
 
+  def test_can_use_generate_all_for_attributes
+    kg = KeyGenerator.new(12345)
+    kg.generate_all
+    assert_equal 12345, kg.key
+    assert_equal 12, kg.a
+    assert_equal 25, kg.b
+    assert_equal 36, kg.c
+    assert_equal 50, kg.d
+  end
+
 end
 
-# >> Run options: --seed 63787
+# >> Run options: --seed 39678
 # >>
 # >> # Running:
 # >>
 # >>
 # >>
-# >> Finished in 0.000738s, 0.0000 runs/s, 0.0000 assertions/s.
+# >> Finished in 0.000660s, 0.0000 runs/s, 0.0000 assertions/s.
 # >>
 # >> 0 runs, 0 assertions, 0 failures, 0 errors, 0 skips
 

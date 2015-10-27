@@ -12,6 +12,14 @@ class KeyGenerator
     @date = date
   end
 
+  def generate_all
+    # kg.generate_key
+    generate_key_offsets
+    generate_date
+    generate_date_offsets
+    generate_final_offsets
+  end
+
   def generate_key
     @key = rand(10000..99999)
   end
@@ -36,11 +44,10 @@ class KeyGenerator
   end
 
   def generate_final_offsets
-    @date = @date.to_i
-    @a = @a + @date[0]
-    @b = @b + @date[1]
-    @c = @c + @date[2]
-    @d = @d + @date[3]
+    @a = @a + @date[0].to_i
+    @b = @b + @date[1].to_i
+    @c = @c + @date[2].to_i
+    @d = @d + @date[3].to_i
   end
 
   def a_key_offset
