@@ -3,17 +3,18 @@ require 'date'
 class KeyGenerator
   attr_accessor :key, :a, :b, :c, :d, :date
 
-  def initialize(key=nil, a=nil, b=nil, c=nil, d=nil, date=nil)
+  def initialize(key=12345, a=nil, b=nil, c=nil, d=nil, date=nil)
     @key = key
     @a = a
     @b = b
     @c = c
     @d = d
     @date = date
+    generate_all
   end
 
   def generate_all
-    # kg.generate_key
+    # generate_key
     generate_key_offsets
     generate_date
     generate_date_offsets
