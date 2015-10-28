@@ -33,29 +33,19 @@ class EncryptorTest < Minitest::Test
     assert e.encryption_key
   end
 
-  def test_can_split_message_into_chars
-    e = Encryptor.new("test message")
-    assert_equal "test message", e.message
-    e.split_message
-    assert_equal ["t", "e", "s", "t", " ", "m", "e", "s", "s", "a", "g", "e"], e.message
-  end
-
   def test_can_find_encryption_key_index_of_first_element_in_message
     e = Encryptor.new("t")
-    e.split_message
-    e.encrypt_letter("t")
+    e.encrypt_message
 
     assert_equal "5", e.encrypted_message[0]
   end
 
   def test_can_encrypt_letters_into_new_array
     e = Encryptor.new("st")
-    e.split_message
-    e.encrypt_letter("s")
-    e.encrypt_letter("t")
+    e.encrypt_message
 
     assert_equal "4", e.encrypted_message[0]
-    assert_equal "5", e.encrypted_message[1]
+    assert_equal "f", e.encrypted_message[1]
   end
 
   def test_can_encrypt_a_string

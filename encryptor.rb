@@ -3,12 +3,13 @@ require_relative 'key_generator'
 
 class Encryptor
 
-  attr_accessor :message, :key, :encrypted_message, :wheel
+  attr_accessor :message, :key, :encrypted_message, :wheels
 
-  def initialize(message=nil, key=nil, encrypted_message=[])
+  def initialize(message=nil, key=nil)
     @message = message
     @key = KeyGenerator.new(12345)
-    @encrypted_message = encrypted_message
+    @encrypted_message = []
+    @wheels = []
   end
 
   def encryption_key
@@ -16,10 +17,9 @@ class Encryptor
   end
 
   def find_rotation(letter)
-    wheel_rotation
     stored_index = encryption_key.find_index(letter)
+    # binding.pry
     total_rotation = ((@wheels[0] + stored_index) % 39)
-    return total_rotation
   end
 
   def change_letter(letter)
@@ -31,18 +31,15 @@ class Encryptor
   end
 
   def encrypt_message
-    split_message
-    @message.each do |letter|
+    assign_wheels
+    @message.chars.each do |letter|
       encrypt_letter(letter)
+      @wheels.rotate!
     end
     @encrypted_message = @encrypted_message.join("")
   end
 
-  def wheel_rotation
+  def assign_wheels
       @wheels = [@key.a, @key.b, @key.c, @key.d]
-  end
-
-  def split_message
-    @message = @message.chars
   end
 end

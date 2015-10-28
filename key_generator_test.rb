@@ -47,7 +47,7 @@ class KeyGeneratorTest < Minitest::Test
     kg = KeyGenerator.new(12345)
     kg.generate_date
 
-    assert_equal "27/10/2015", kg.date
+    assert_equal "28/10/2015", kg.date
   end
 
   def test_can_generate_final_date_offsets_from_date
