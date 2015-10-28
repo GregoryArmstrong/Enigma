@@ -15,14 +15,15 @@ class Encryptor
     encryption_key = ('a'..'z').to_a + ("0".."9").to_a + [" ", ".", ","]             # => ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " ", ".", ","]
   end
 
-  def find_rotation(letter, wheel)
+  def find_rotation(letter)
+    wheel_rotation
     stored_index = encryption_key.find_index(letter)
-    total_rotation = ((wheel + stored_index) % 39)
+    total_rotation = ((@wheels[0] + stored_index) % 39)
     return total_rotation
   end
 
   def change_letter(letter)
-    stored_letter = encryption_key.fetch(find_rotation(letter, wheel_rotation))
+    stored_letter = encryption_key.fetch(find_rotation(letter))
   end
 
   def encrypt_letter(letter)
@@ -38,14 +39,7 @@ class Encryptor
   end
 
   def wheel_rotation
-    counter = 0
-    wheels = [@key.a, @key.b, @key.c, @key.d]
-    wheel = wheels[counter]
-    counter += 1
-      if counter >= 4
-        counter = 0
-      end
-    return wheel
+      @wheels = [@key.a, @key.b, @key.c, @key.d]
   end
 
   def split_message

@@ -61,9 +61,8 @@ class EncryptorTest < Minitest::Test
   def test_can_encrypt_a_string
     e = Encryptor.new("string")
     e.encrypt_message
-    binding.pry
 
-    assert_equal "453uzs", e.encrypted_message
+    assert_equal "4fotz5", e.encrypted_message
   end
 
 end
