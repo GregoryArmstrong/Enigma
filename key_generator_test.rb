@@ -7,7 +7,6 @@ require_relative 'enigma'         # ~> LoadError: cannot load such file -- ./eni
 class KeyGeneratorTest < Minitest::Test
 
   def test_starts_with_no_key
-    skip
     kg = KeyGenerator.new
 
     assert_equal nil, kg.key
@@ -37,8 +36,7 @@ class KeyGeneratorTest < Minitest::Test
   end
 
   def test_starts_with_no_date
-    skip
-    kg = KeyGenerator.new(12345)
+    kg = KeyGenerator.new
 
     assert_equal nil, kg.date
   end

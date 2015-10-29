@@ -6,9 +6,9 @@ class Decryptor
 
   attr_accessor :message, :key, :decrypted_message, :wheels
 
-  def initialize(message=nil, key=nil)
+  def initialize(message=nil, key=12345)
     @message = message
-    @key = KeyGenerator.new
+    @key = KeyGenerator.new(key)
     @decrypted_message = []
     @wheels = []
   end

@@ -18,11 +18,4 @@ class DecryptorTest < Minitest::Test
     assert_equal "string", d.decrypt_message
   end
 
-
-
-
-
-
-
-
 end

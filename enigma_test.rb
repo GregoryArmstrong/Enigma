@@ -31,24 +31,16 @@ class EnigmaTest < Minitest::Test
     assert_equal nil, e.date
   end
 
-  def test_has_date_after_running_keygenerator
-    skip
-    e = Enigma.new
-    e.encrypt
-
-    assert_equal "0225", e.date
-  end
-
   def test_enigma_takes_message
     e = Enigma.new("test message")
-    e.encrypt
 
     assert_equal "test message", e.message
   end
 
-  def test_enigma_creates_encryptor_object
-    e = Enigma.new
-    e.encrypt
+  def test_enigma_can_encrypt_message
+    enigma = Enigma.new("test message ..end..", 56789)
+
+    assert_equal " 8u9odg894iuo2au47ao", enigma.encrypt
   end
 
 end

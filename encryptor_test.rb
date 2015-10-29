@@ -8,48 +8,8 @@ require 'pry'
 
 class EncryptorTest < Minitest::Test
 
-  def test_can_create_encryptor_instance
-    e = Encryptor.new
-
-    assert e
-  end
-
-  def test_can_initialize_encryptor_with_no_message
-    e = Encryptor.new
-
-    refute e.message
-  end
-
-  def test_can_initialize_encryptor_with_key_generator
-    e = Encryptor.new
-
-    assert e.key
-    assert_equal 12345, e.key.key
-  end
-
-  def test_can_call_master_encryption_key
-    e = Encryptor.new
-
-    assert e.encryption_key
-  end
-
-  def test_can_find_encryption_key_index_of_first_element_in_message
-    e = Encryptor.new("t")
-    e.encrypt_message
-
-    assert_equal "5", e.encrypted_message[0]
-  end
-
-  def test_can_encrypt_letters_into_new_array
-    e = Encryptor.new("st")
-    e.encrypt_message
-
-    assert_equal "4", e.encrypted_message[0]
-    assert_equal "f", e.encrypted_message[1]
-  end
-
   def test_can_encrypt_a_string
-    e = Encryptor.new("string")
+    e = Encryptor.new("string", 12345)
     e.encrypt_message
 
     assert_equal "4fotz5", e.encrypted_message

@@ -7,7 +7,8 @@ class Encryptor
 
   def initialize(message=nil, key=nil)
     @message = message
-    @key = KeyGenerator.new(key)
+    kg = KeyGenerator.new(12345)
+    @key = kg
     @encrypted_message = []
     @wheels = []
   end
