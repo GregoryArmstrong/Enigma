@@ -50,21 +50,4 @@ class CrackerTest < Minitest::Test
     assert_equal "test message ..end..", c.message
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 end

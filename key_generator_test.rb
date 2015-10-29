@@ -6,16 +6,10 @@ require_relative 'enigma'         # ~> LoadError: cannot load such file -- ./eni
 
 class KeyGeneratorTest < Minitest::Test
 
-  def test_starts_with_no_key
-    kg = KeyGenerator.new
-
-    assert_equal nil, kg.key
-  end
-
   def test_can_start_with_key_if_desired
-    kg = KeyGenerator.new(12345)
+    kg = KeyGenerator.new(34567)
 
-    assert_equal 12345, kg.key
+    assert_equal 34567, kg.key
   end
 
   def test_can_generate_random_5_digit_key
@@ -35,17 +29,11 @@ class KeyGeneratorTest < Minitest::Test
     assert_equal 45, kg.d
   end
 
-  def test_starts_with_no_date
-    kg = KeyGenerator.new
-
-    assert_equal nil, kg.date
-  end
-
   def test_can_generate_date_offsets
     kg = KeyGenerator.new(12345)
     kg.generate_date
 
-    assert_equal "28/10/2015", kg.date
+    assert_equal "29/10/2015", kg.date
   end
 
   def test_can_generate_final_date_offsets_from_date

@@ -15,6 +15,13 @@ class EncryptorTest < Minitest::Test
     assert_equal "4fotz5", e.encrypted_message
   end
 
+  def test_can_encrypt_a_string_with_no_key_given
+    e = Encryptor.new("string")
+    e.encrypt_message
+
+    assert_equal "4fotz5", e.encrypted_message
+  end
+
 end
   #
   #   assert_equal 12345, kg.key

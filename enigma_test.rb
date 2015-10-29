@@ -43,6 +43,35 @@ class EnigmaTest < Minitest::Test
     assert_equal " 8u9odg894iuo2au47ao", enigma.encrypt
   end
 
+  def test_enigma_can_decrypt_message
+    enigma = Enigma.new(" 8u9odg894iuo2au47ao", 56789)
+
+    assert_equal "test message ..end..", enigma.decrypt
+  end
+
+  def test_enigma_can_crack_message
+    enigma = Enigma.new(" 8u9odg894iuo2au47ao")
+
+    assert_equal "test message ..end..", enigma.crack
+  end
+
+  def test_enigma_can_start_with_no_message_and_pass_message_to_encrypt
+    enigma = Enigma.new
+
+    assert_equal "om.n5uxmniz.5gr.ilr5", enigma.encrypt("test message ..end..", 34567)
+  end
+
+  def test_enigma_can_start_with_no_message_and_pass_message_to_decrypt
+    enigma = Enigma.new
+
+    assert_equal "test message ..end..", enigma.decrypt("om.n5uxmniz.5gr.ilr5", 34567)
+  end
+
+  def test_enigma_can_start_with_no_message_and_pass_message_to_crack
+    enigma = Enigma.new
+
+    assert_equal "test message ..end..", enigma.crack("om.n5uxmniz.5gr.ilr5")
+  end
 end
 
 # >> Run options: --seed 44936
