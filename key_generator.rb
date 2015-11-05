@@ -30,6 +30,7 @@ class KeyGenerator
   end
 
   def generate_key_offsets
+    # binding.pry
     a_key_offset
     b_key_offset
     c_key_offset
@@ -51,6 +52,7 @@ class KeyGenerator
   end
 
   def a_key_offset
+    binding.pry
     @a = @key.to_s[0] + @key.to_s[1]
     @a = @a.to_i
   end

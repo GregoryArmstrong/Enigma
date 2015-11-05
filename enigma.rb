@@ -1,8 +1,7 @@
 require_relative 'key_generator'
 require_relative 'encryptor'
 require_relative 'decryptor'
-require_relative 'cracker'
-require 'pry'  # => true
+require_relative 'cracker'# => true
 
 class Enigma
 
