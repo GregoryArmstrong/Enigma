@@ -1,5 +1,5 @@
-require_relative 'enigma'
-require_relative 'key_generator'
+require '../lib/enigma'
+require '../lib/key_generator'
 
 class Encryptor
 

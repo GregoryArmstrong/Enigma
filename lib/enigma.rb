@@ -1,6 +1,6 @@
-require_relative 'encryptor'
-require_relative 'decryptor'
-require_relative 'cracker'
+require '../lib/encryptor'
+require '../lib/decryptor'
+require '../lib/cracker'
 require 'pry'
 
 class Enigma

@@ -1,6 +1,6 @@
-require_relative 'key_generator'
-require_relative 'encryptor'
-require_relative 'decryptor'
+require '../lib/key_generator'
+require '../lib/encryptor'
+require '../lib/decryptor'
 
 class Cracker
 
