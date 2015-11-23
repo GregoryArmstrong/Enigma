@@ -6,15 +6,12 @@ class Cracker
 
   attr_accessor :message, :known_message, :last_rotation, :a_pair, :b_pair, :c_pair, :d_pair, :rotation_map, :decrypted_rotations
 
-  def initialize(message=nil, known_message=nil, last_rotation=nil, a_pair=[], b_pair=[], c_pair=[], d_pair=[], decrypted_rotations=[])
+  def initialize(message=nil)
     @message = message
-    @known_message = known_message
-    @last_rotation = last_rotation
-    @a_pair = a_pair
-    @b_pair = b_pair
-    @c_pair = c_pair
-    @d_pair = d_pair
-    @decrypted_rotations = decrypted_rotations
+    @a_pair = []
+    @b_pair = []
+    @c_pair = []
+    @d_pair = []
   end
 
   def encryption_key
@@ -22,9 +19,7 @@ class Cracker
   end
 
   def isolate_known_message_pieces
-    chars = message.chars
-    known_chars = chars[-7..-1]
-    @known_message = known_chars.join
+    @known_message = message[-7..-1]
   end
 
   def identify_rotation_positions
@@ -79,10 +74,8 @@ class Cracker
 
   def assign_decrypted_rotations
     pairs = [a_pair, b_pair, c_pair, d_pair]
-    pairs.each do |first, second|
-      encrypted_letter = first
-      decrypted_letter = second
-      @decrypted_rotations << find_rotation_difference(encrypted_letter, decrypted_letter)
+    @decrypted_rotations = pairs.map do |first_character, second_character|
+      find_rotation_difference(first_character, second_character)
     end
   end
 
@@ -94,14 +87,12 @@ class Cracker
   end
 
   def decrypt_cracked_message
-    d = Decryptor.new
+    d = Decryptor.new(message)
     d.key.a = decrypted_rotations[0]
     d.key.b = decrypted_rotations[1]
     d.key.c = decrypted_rotations[2]
     d.key.d = decrypted_rotations[3]
-    d.message = message
-    d.decrypt_message
-    @message = d.decrypted_message
+    @message = d.decrypt_message
   end
 
 end

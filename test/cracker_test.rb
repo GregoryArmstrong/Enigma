@@ -7,7 +7,7 @@ require 'pry'
 class CrackerTest < Minitest::Test
 
   def test_can_generate_instance_of_cracker
-    c = Cracker.new("test message", 54321)
+    c = Cracker.new("test message")
 
     assert c
   end
@@ -27,7 +27,7 @@ class CrackerTest < Minitest::Test
   end
 
   def test_can_isolate_key_rotation_pairs_from_known_last_rotation
-    c = Cracker.new("apslrxek,lg9rj.97o.3", 12345)
+    c = Cracker.new("apslrxek,lg9rj.97o.3")
     c.isolate_known_message_pieces
     c.identify_rotation_positions
     c.pair_matching_rotations
