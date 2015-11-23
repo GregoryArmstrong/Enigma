@@ -61,4 +61,11 @@ class KeyGeneratorTest < Minitest::Test
     assert_equal 50, kg.d
   end
 
+  def test_key_generator_can_format_date_if_given_date_object
+    example = KeyGenerator.new(34567, Date.today)
+    example.generate_all
+
+    assert_equal "3225", example.date
+  end
+
 end
