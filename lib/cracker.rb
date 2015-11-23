@@ -6,7 +6,7 @@ class Cracker
 
   attr_accessor :message, :known_message, :last_rotation, :a_pair, :b_pair, :c_pair, :d_pair, :rotation_map, :decrypted_rotations
 
-  def initialize(message=nil, known_message=nil, last_rotation=nil, a_pair=[], b_pair=[], c_pair=[], d_pair=[], rotation_map=[], decrypted_rotations=[])
+  def initialize(message=nil, known_message=nil, last_rotation=nil, a_pair=[], b_pair=[], c_pair=[], d_pair=[], decrypted_rotations=[])
     @message = message
     @known_message = known_message
     @last_rotation = last_rotation
@@ -14,7 +14,6 @@ class Cracker
     @b_pair = b_pair
     @c_pair = c_pair
     @d_pair = d_pair
-    @rotation_map = rotation_map
     @decrypted_rotations = decrypted_rotations
   end
 
@@ -43,31 +42,34 @@ class Cracker
 
   def pair_matching_rotations
     @rotation_map = [a_pair, b_pair, c_pair, d_pair]
-    if last_rotation == "d"
+    case last_rotation
+    when "d"
       @rotation_map.rotate!(1)
       collect_rotation_pairs
-    elsif last_rotation == "a"
+    when "a"
       @rotation_map.rotate!(2)
       collect_rotation_pairs
-    elsif last_rotation == "b"
+    when "b"
       @rotation_map.rotate!(3)
       collect_rotation_pairs
-    else
+    when "c"
       collect_rotation_pairs
     end
   end
 
   def collect_rotation_pairs
     known_unencrypted_message = "..end..".chars
-    @rotation_map[0] << known_message[4]
-    @rotation_map[0] << known_unencrypted_message[4]
-    @rotation_map[1] << known_message[5]
-    @rotation_map[1] << known_unencrypted_message[5]
-    @rotation_map[2] << known_message[6]
-    @rotation_map[2] << known_unencrypted_message[6]
-    @rotation_map[3] << known_message[3]
-    @rotation_map[3] << known_unencrypted_message[3]
+    set_rotation_map(known_unencrypted_message, 0, 4)
+    set_rotation_map(known_unencrypted_message, 1, 5)
+    set_rotation_map(known_unencrypted_message, 2, 6)
+    set_rotation_map(known_unencrypted_message, 3, 3)
   end
+
+  def set_rotation_map(known_unencrypted_message, set_position, pull_position)
+    @rotation_map[set_position].push(known_message[pull_position])
+    @rotation_map[set_position].push(known_unencrypted_message[pull_position])
+  end
+
 
   def find_rotation_difference(encrypted_letter, decrypted_letter)
     encrypted_stored_index = encryption_key.find_index(encrypted_letter)

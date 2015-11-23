@@ -15,21 +15,21 @@ class Enigma
 
   def encrypt(message=nil, key=nil, date=nil)
     @encryptor = Encryptor.new(message, key, date)
-    encryptor.message = initialized_message || message
+    encryptor.message = message || initialized_message
     key_setter(encryptor, master_key, key)
     encryptor.encrypt_message
   end
 
   def decrypt(message=nil, key=nil, date=nil)
     @decryptor = Decryptor.new(message, key, date)
-    decryptor.message = initialized_message || message
+    decryptor.message = message || initialized_message
     key_setter(decryptor, master_key, key)
     decryptor.decrypt_message
   end
 
   def crack(message=nil, date=nil)
     @cracker = Cracker.new
-    cracker.message = initialized_message || message
+    cracker.message = message || initialized_message
     cracker.crack_message
     cracker.decrypt_cracked_message
   end
