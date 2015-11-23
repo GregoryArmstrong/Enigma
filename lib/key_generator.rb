@@ -43,10 +43,8 @@ class KeyGenerator
   end
 
   def generate_date_offsets
-    date_offset = (date[0] + date[1] + date[3] + date[4] + date[8] + date[9])
-    squared_date = date_offset.to_i * date_offset.to_i
-    squared_date_offsets = squared_date.to_s[-4..-1]
-    @date = squared_date_offsets
+    date_offset = (date[0] + date[1] + date[3] + date[4] + date[8] + date[9]).to_i
+    @date = (date_offset * date_offset).to_s[-4..-1]
   end
 
   def generate_final_offsets
@@ -57,22 +55,18 @@ class KeyGenerator
   end
 
   def a_key_offset
-    a = key.to_s[0] + key.to_s[1]
-    @a = a.to_i
+    @a = (key.to_s[0] + key.to_s[1]).to_i
   end
 
   def b_key_offset
-    b = key.to_s[1] + key.to_s[2]
-    @b = b.to_i
+    @b = (key.to_s[1] + key.to_s[2]).to_i
   end
 
   def c_key_offset
-    c = key.to_s[2] + key.to_s[3]
-    @c = c.to_i
+    @c = (key.to_s[2] + key.to_s[3]).to_i
   end
 
   def d_key_offset
-    d = key.to_s[3] + key.to_s[4]
-    @d = d.to_i
+    @d = (key.to_s[3] + key.to_s[4]).to_i
   end
 end
