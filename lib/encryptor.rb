@@ -9,7 +9,6 @@ class Encryptor
     @message = message
     @key = KeyGenerator.new(key, date)
     @encrypted_message = []
-    @wheels = []
   end
 
   def encryption_key
@@ -18,27 +17,24 @@ class Encryptor
 
   def find_rotation(letter)
     stored_index = encryption_key.find_index(letter.downcase)
-    total_rotation = ((wheels[0] + stored_index) % 39)
+    ((wheels[0] + stored_index) % 39)
   end
 
   def change_letter(letter)
-    stored_letter = encryption_key.fetch(find_rotation(letter))
+    encryption_key.fetch(find_rotation(letter))
   end
 
   def encrypt_letter(letter)
-    @encrypted_message << change_letter(letter)
+    @encrypted_message.push(change_letter(letter))
   end
 
   def encrypt_message
-    assign_wheels
+    @wheels = [key.a, key.b, key.c, key.d]
     message.chars.each do |letter|
       encrypt_letter(letter)
-      @wheels.rotate!
+      wheels.rotate!
     end
     @encrypted_message = encrypted_message.join("")
   end
 
-  def assign_wheels
-      @wheels = [key.a, key.b, key.c, key.d]
-  end
 end

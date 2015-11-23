@@ -15,7 +15,6 @@ class KeyGenerator
 
   def generate_all
     generate_date
-    generate_key_offsets
     generate_date_offsets
     generate_final_offsets
   end
@@ -35,23 +34,16 @@ class KeyGenerator
     end
   end
 
-  def generate_key_offsets
-    a_key_offset
-    b_key_offset
-    c_key_offset
-    d_key_offset
-  end
-
   def generate_date_offsets
     date_offset = (date[0] + date[1] + date[3] + date[4] + date[8] + date[9]).to_i
     @date = (date_offset * date_offset).to_s[-4..-1]
   end
 
   def generate_final_offsets
-    @a = a + date[0].to_i
-    @b = b + date[1].to_i
-    @c = c + date[2].to_i
-    @d = d + date[3].to_i
+    @a = a_key_offset + date[0].to_i
+    @b = b_key_offset + date[1].to_i
+    @c = c_key_offset + date[2].to_i
+    @d = d_key_offset + date[3].to_i
   end
 
   def a_key_offset

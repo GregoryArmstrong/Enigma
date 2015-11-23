@@ -23,13 +23,10 @@ class KeyGeneratorTest < Minitest::Test
   end
 
   def test_can_generate_key_offsets
-    kg.generate_key_offsets
-
-    assert_equal 12345, kg.key
-    assert_equal 12, kg.a
-    assert_equal 23, kg.b
-    assert_equal 34, kg.c
-    assert_equal 45, kg.d
+    assert_equal 12, kg.a_key_offset
+    assert_equal 23, kg.b_key_offset
+    assert_equal 34, kg.c_key_offset
+    assert_equal 45, kg.d_key_offset
   end
 
   def test_can_generate_final_date_offsets_from_date
